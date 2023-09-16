@@ -30,6 +30,6 @@ PRIMARY KEY (client_id)
 )"""
 execute_query(conn, create_clients_table)
 
-# Now we insert James, John, Jack as new entries and add it to the table
+# Now we insert James, John, Jack as new entries in the Clients table
 query = "INSERT INTO clients (first_name) VALUES ('James'),('John'), ('Jack')"
 execute_query(conn, query)
