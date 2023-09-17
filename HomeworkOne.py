@@ -52,17 +52,23 @@ execute_query(conn, query2)
 # Show user list of all available sellers
 select_seller_data = "SELECT seller FROM sellers"
 select_sellers = execute_read_query(conn, select_seller_data)
-print(f"Available Sellers:")
+print(f"\nAvailable Sellers:")
 for x in select_sellers:
     print(x)
 
+# Print the user input strings
 userInput = input("Enter the seller's name: ")
-print("Sales Report for " + userInput + ":")
+print("\nSales Report for " + userInput + ":")
 
 # Select/fetch all data in the sales table where the seller is equal to the user's input
-select_sales_data = "SELECT * FROM sales WHERE seller = '%s'" % userInput
-sales_data = execute_read_query(conn, select_sales_data)
+select_sales = "SELECT * FROM sales WHERE seller = '%s'" % userInput
+sales_data = execute_read_query(conn, select_sales)
 for x in sales_data:
     print(x)
+
+# Total sales calculation based on user input
+select_total_sales = "SELECT SUM(price) FROM sales WHERE seller = '%s'" % userInput
+total_sales = execute_read_query(conn, select_total_sales)
+print(f"\nTotal Sales for James: $%s" % total_sales)
 
 
