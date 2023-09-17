@@ -49,16 +49,20 @@ INSERT INTO sales(sale_id,seller,product,quantity,price) VALUES
 """
 execute_query(conn, query2)
 
-# # Select/fetch all data in the sales table and represent it as a dictionary
-# select_sales_data = "SELECT * FROM sales"
-# sales_data = execute_read_query(conn, select_sales_data)
-
 # Show user list of all available sellers
 select_seller_data = "SELECT seller FROM sellers"
 select_sellers = execute_read_query(conn, select_seller_data)
-print('Available Sellers:\n')
+print(f"Available Sellers:")
 for x in select_sellers:
-    print("%s" % x)
+    print(x)
 
-# select_product_data = "SELECT product FROM sales"
-# select_products = execute_read_query(conn, select_product_data)
+userInput = input("Enter the seller's name: ")
+print("Sales Report for " + userInput + ":")
+
+# Select/fetch all data in the sales table where the seller is equal to the user's input
+select_sales_data = "SELECT * FROM sales WHERE seller = '%s'" % userInput
+sales_data = execute_read_query(conn, select_sales_data)
+for x in sales_data:
+    print(x)
+
+
