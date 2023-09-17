@@ -21,17 +21,17 @@ PRIMARY KEY (sale_id)
 )"""
 execute_query(conn, create_sales_table)
 
-# Creates a table for Clients
-create_clients_table = """
-CREATE TABLE IF NOT EXISTS clients(
-client_id INT AUTO_INCREMENT,
-first_name VARCHAR(255) NOT NULL,
-PRIMARY KEY (client_id)
+# Creates a table for sellers
+create_sellers_table = """
+CREATE TABLE IF NOT EXISTS sellers(
+seller VARCHAR(255) NOT NULL,
+last_name VARCHAR(255) NOT NULl,
+PRIMARY KEY (seller)
 )"""
-execute_query(conn, create_clients_table)
+execute_query(conn, create_sellers_table)
 
-# Now we insert James, John, Jack as new entries in the Clients table
-query = "INSERT INTO clients (first_name) VALUES ('James'),('John'), ('Jack')"
+# Now we insert James, John, Jack as new entries in the sellers table
+query = "INSERT INTO sellers (seller, last_name) VALUES ('James','Deer'),('John','Doe'), ('Jack','Reaper')"
 execute_query(conn, query)
 
 # Inserting rows into the sales table
@@ -49,4 +49,16 @@ INSERT INTO sales(sale_id,seller,product,quantity,price) VALUES
 """
 execute_query(conn, query2)
 
+# # Select/fetch all data in the sales table and represent it as a dictionary
+# select_sales_data = "SELECT * FROM sales"
+# sales_data = execute_read_query(conn, select_sales_data)
 
+# Show user list of all available sellers
+select_seller_data = "SELECT seller FROM sellers"
+select_sellers = execute_read_query(conn, select_seller_data)
+print('Available Sellers:\n')
+for x in select_sellers:
+    print("%s" % x)
+
+# select_product_data = "SELECT product FROM sales"
+# select_products = execute_read_query(conn, select_product_data)
